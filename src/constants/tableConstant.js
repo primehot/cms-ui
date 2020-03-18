@@ -1,1 +1,1 @@
-export const TABLE_DEFAULT_POSITION = "No selected language";
+export const TAB_DEFAULT_NAME = "No selected language";

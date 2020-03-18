@@ -3,27 +3,23 @@ import './ArticleContainer.css';
 import ArticleForm from "../form/ArticleForm";
 import CreateEditTranslations from "../translations/ArticleTranslationTab";
 import Button from "@material-ui/core/Button";
-import {TABLE_DEFAULT_POSITION} from "../../../constants/tableConstant";
 
 function ArticleContainer() {
 
     const [mainArticleDetails, setMainArticleDetails] = useState();
-    const [articleTranslations, setArticleTranslations] = useState();
+    const [articleTranslations, setArticleTranslations] = useState([]);
 
     const onMainArticleChangeCallback = (changes) => {
         const updatedArticle = {...mainArticleDetails, ...changes};
-        console.log({updatedArticle});
         setMainArticleDetails(updatedArticle);
     };
 
     const addNewTranslation = () => {
-        const n = {...articleTranslations, ...{[TABLE_DEFAULT_POSITION]: null}};
-        console.log(n)
-        setArticleTranslations(n);
+        setArticleTranslations(articleTranslations.concat([{}]));
     };
 
-    const onTranslationChangeCallback = () => {
-        setArticleTranslations();
+    const onTranslationChangeCallback = (updatedTranslations) => {
+        setArticleTranslations(updatedTranslations);
     };
 
     const afterSubmission = (event) => {
@@ -40,7 +36,8 @@ function ArticleContainer() {
                         </Button>
                     </ArticleForm>
 
-                    <CreateEditTranslations translations={articleTranslations} onTranslationChangeCallback={onTranslationChangeCallback}/>
+                    <CreateEditTranslations translations={articleTranslations}
+                                            onTranslationChangeCallback={onTranslationChangeCallback}/>
                 </div>
             </div>
             <Button variant="contained" color="primary" size="medium" type="submit">

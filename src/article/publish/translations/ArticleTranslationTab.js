@@ -4,57 +4,61 @@ import Tab from "@material-ui/core/Tab";
 import './ArticleTranslationTab.css'
 import Paper from "@material-ui/core/Paper";
 import ArticleForm from "../form/ArticleForm";
-import {TABLE_DEFAULT_POSITION} from "../../../constants/tableConstant";
 import Button from "@material-ui/core/Button";
+import {TAB_DEFAULT_NAME} from "../../../constants/tableConstant";
 
 function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
 
     const [article, setArticle] = useState();
-    const [tabPosition, setTabPosition] = useState(TABLE_DEFAULT_POSITION);
-    const [tabPositions, setTabPositions] = useState();
+    const [tabPosition, setTabPosition] = useState(0);
+    const [tabPositionNames, setTabPositionNames] = useState([]);
 
     useEffect(() => {
-        if (translations) {
-            console.log(Object.keys(translations))
-            setTabPositions(Object.keys(translations));
+        if (translations.length > 0) {
+            setTabPositionNames(translations.map(article => article.language));
         }
     }, [translations]);
 
     useEffect(() => {
-        if (translations) {
+        if (translations.length > 0) {
             setArticle(translations[tabPosition]);
         }
     }, [tabPosition, translations]);
 
     const onTabChange = (event, newValue) => {
-        if (tabPosition !== TABLE_DEFAULT_POSITION) {
+        // if (tabPosition !== TABLE_DEFAULT_POSITION) {
             setTabPosition(newValue)
-        }
+        // }
     };
 
-    const onArticleChangeCallback = () => {
-
+    const onArticleChangeCallback = (changes) => {
+        const updatedArticle = {...article, ...changes};
+        const updatedTranslation = {...translations[tabPosition], ...updatedArticle};
+        const copiedTranslations = translations.slice(0);
+        copiedTranslations[tabPosition] = updatedTranslation;
+        onTranslationChangeCallback(copiedTranslations)
     };
 
     const onTranslationRemove = () => {
-
+        const updatedTranslations = translations.splice(tabPosition, 1);
+        onTranslationChangeCallback(updatedTranslations);
     };
 
     return (
         <>
-            {!!translations &&
+            {translations.length > 0 &&
             <div>
                 <Paper square>
                     <Tabs
-                        value={tabPosition}
-                        indicatorColor="primary"
+                        value={tabPosition < tabPositionNames.length ? tabPosition : tabPositionNames.length - 1}
+                        indicatorColor="secondary"
                         textColor="primary"
                         variant="scrollable"
                         scrollButtons="auto"
                         onChange={onTabChange}
                     >
-                        {tabPositions && tabPositions.map((position, index) =>
-                            <Tab key={index} value={position} label={position}/>)}
+                        {tabPositionNames.map((name, index) =>
+                            <Tab key={index} value={index} label={name ? name : TAB_DEFAULT_NAME}/>)}
                     </Tabs>
                 </Paper>
                 <ArticleForm article={article} onChangeCallback={onArticleChangeCallback}>
