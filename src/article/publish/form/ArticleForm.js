@@ -1,9 +1,10 @@
 import React from "react";
-import {Select, TextField} from "@material-ui/core";
+import {TextField} from "@material-ui/core";
 import './ArticleForm.css'
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import {connect} from "react-redux";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 function ArticleForm({article, onChangeCallback, availableLanguages, children}) {
 
@@ -11,13 +12,16 @@ function ArticleForm({article, onChangeCallback, availableLanguages, children}) 
 
     return (
         <div className="article-publish-form">
+            <InputLabel>Language</InputLabel>
             <Select
+                native
                 required
                 value={language || ''}
                 onChange={(event) => onChangeCallback({language: event.target.value})}
             >
-                {language && <MenuItem value={language}>{language}</MenuItem>}
-                {availableLanguages.map((lng, index) => <MenuItem key={index} value={lng}>{lng}</MenuItem>)}
+                <option value="">Not defined</option>
+                {language && <option value={language}>{language}</option>}
+                {availableLanguages.map((lng, index) => <option key={index} value={lng}>{lng}</option>)}
             </Select>
             {!language && <FormHelperText>This is required!</FormHelperText>}
             <TextField
