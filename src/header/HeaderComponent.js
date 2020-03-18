@@ -8,7 +8,7 @@ function HeaderComponent() {
     return (
         <div className='binance-c-header'>
             <div className='binance-c-header-content'>
-                <span className='binance-c-header-title'>Binance CMS</span>
+                <Link className='binance-c-header-title' to="/" activeClassName="active">Binance CMS</Link>
                 <Button
                     component={Link} to="/article/"
                     variant="contained"
