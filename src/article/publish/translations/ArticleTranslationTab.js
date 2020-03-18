@@ -5,7 +5,7 @@ import './ArticleTranslationTab.css'
 import Paper from "@material-ui/core/Paper";
 import ArticleForm from "../form/ArticleForm";
 import Button from "@material-ui/core/Button";
-import {TAB_DEFAULT_NAME} from "../../../constants/tableConstant";
+import {TAB_DEFAULT_NAME} from "../../../constants";
 
 function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
 

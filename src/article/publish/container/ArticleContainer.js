@@ -1,13 +1,24 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './ArticleContainer.css';
 import ArticleForm from "../form/ArticleForm";
 import CreateEditTranslations from "../translations/ArticleTranslationTab";
 import Button from "@material-ui/core/Button";
+import {setAvailableLanguages} from "../../../store/action/languageAction";
+import {connect} from "react-redux";
+import {languages} from "../../../constants"
 
-function ArticleContainer() {
+function ArticleContainer({setAvailableLanguages}) {
 
     const [mainArticleDetails, setMainArticleDetails] = useState();
     const [articleTranslations, setArticleTranslations] = useState([]);
+
+    useEffect(() => {
+        if(mainArticleDetails) {
+            const usedLanguage = articleTranslations.map(({language}) => language);
+            usedLanguage.push(mainArticleDetails.language);
+            setAvailableLanguages(languages.filter(language => !usedLanguage.includes(language)));
+        }
+    }, [mainArticleDetails, articleTranslations]);
 
     const onMainArticleChangeCallback = (changes) => {
         const updatedArticle = {...mainArticleDetails, ...changes};
@@ -45,7 +56,10 @@ function ArticleContainer() {
             </Button>
         </form>
     );
-
 }
 
-export default ArticleContainer;
+const mapDispatchToProps = (dispatch) => ({
+    setAvailableLanguages: payload => dispatch(setAvailableLanguages(payload)),
+});
+
+export default connect(null, mapDispatchToProps)(ArticleContainer);

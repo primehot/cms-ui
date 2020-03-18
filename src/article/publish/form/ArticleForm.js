@@ -3,10 +3,9 @@ import {Select, TextField} from "@material-ui/core";
 import './ArticleForm.css'
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
+import {connect} from "react-redux";
 
-const languages = ["UA", "RU", "ENG"]
-
-function ArticleForm({article, onChangeCallback, children}) {
+function ArticleForm({article, onChangeCallback, availableLanguages, children}) {
 
     const {language, title, description} = article || {};
 
@@ -17,7 +16,7 @@ function ArticleForm({article, onChangeCallback, children}) {
                 value={language || ''}
                 onChange={(event) => onChangeCallback({language: event.target.value})}
             >
-                {languages.map((l, index) => <MenuItem key={index} value={l}>{l}</MenuItem>)}
+                {availableLanguages.map((l, index) => <MenuItem key={index} value={l}>{l}</MenuItem>)}
             </Select>
             {!language && <FormHelperText>This is required!</FormHelperText>}
             <TextField
@@ -46,4 +45,10 @@ function ArticleForm({article, onChangeCallback, children}) {
     );
 }
 
-export default ArticleForm;
+const mapStateToProps = state => {
+    return {
+        availableLanguages: state.availableLanguages
+    };
+};
+
+export default connect(mapStateToProps, null)(ArticleForm);
