@@ -7,12 +7,14 @@ import {setAvailableLanguages} from "../../../store/action/languageAction";
 import {connect} from "react-redux";
 import {languages} from "../../../constants";
 import ArticleImageUploadView from "../image/AricleImageUploadView";
+import {postArticle} from "../../../service/ArticleService";
 
 function ArticleContainer({setAvailableLanguages}) {
 
     const [mainArticleDetails, setMainArticleDetails] = useState({});
     const [articleTranslations, setArticleTranslations] = useState([]);
     const [addTranslationDisabled, setAddTranslationDisabled] = useState(false);
+    const [imageId, setImageId] = useState();
 
     useEffect(() => {
         if(mainArticleDetails) {
@@ -39,6 +41,10 @@ function ArticleContainer({setAvailableLanguages}) {
 
     const afterSubmission = (event) => {
         event.preventDefault();
+        const article = {...mainArticleDetails, translations: articleTranslations, imageId};
+        postArticle(article).then(response => {
+            console.log(response)
+        });
     };
 
     const onPublishClick = () => {
@@ -49,7 +55,7 @@ function ArticleContainer({setAvailableLanguages}) {
         <form onSubmit={afterSubmission}>
             <div className="article-publish-container">
                 <div className="article-publish-container-data">
-                    <ArticleImageUploadView />
+                    <ArticleImageUploadView onImageUpload={setImageId}/>
                 </div>
                 <div className="article-publish-container-data">
 

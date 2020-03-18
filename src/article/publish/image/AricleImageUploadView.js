@@ -1,14 +1,20 @@
 import React, {useRef, useState} from "react";
 import Button from "@material-ui/core/Button";
 import './AricleImageUploadView.css'
+import {postImage} from "../../../service/ArticleService";
 
-function ArticleImageUploadView() {
+function ArticleImageUploadView({onImageUpload}) {
 
     const imageUploadRef = useRef();
-    const [image, setImage] = useState()
+    const [image, setImage] = useState();
 
     const handleChange = (event) => {
-        setImage(URL.createObjectURL(event.target.files[0]))
+        const imageBytes = event.target.files[0];
+        postImage(imageBytes).then(response => {
+            console.log('imageSaved', response.data);
+            onImageUpload(response.data);
+        });
+        setImage(URL.createObjectURL(imageBytes));
     };
 
     return (
