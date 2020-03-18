@@ -5,7 +5,7 @@ import CreateEditTranslations from "../translations/ArticleTranslationTab";
 import Button from "@material-ui/core/Button";
 import {setAvailableLanguages} from "../../../store/action/languageAction";
 import {connect} from "react-redux";
-import {languages} from "../../../constants";
+import {LANGUAGES} from "../../../constants";
 import ArticleImageUploadView from "../image/AricleImageUploadView";
 import {postArticle} from "../../../service/ArticleService";
 
@@ -20,7 +20,7 @@ function ArticleContainer({setAvailableLanguages}) {
         if(mainArticleDetails) {
             const usedLanguage = articleTranslations.map(({language}) => language);
             usedLanguage.push(mainArticleDetails.language);
-            const unusedLanguages = languages.filter(language => !usedLanguage.includes(language));
+            const unusedLanguages = LANGUAGES.filter(language => !usedLanguage.includes(language));
             setAvailableLanguages(unusedLanguages);
             setAddTranslationDisabled(!mainArticleDetails.language || articleTranslations.filter(el => !el.language).length > 0 || unusedLanguages.length === 0);
         }
@@ -41,7 +41,9 @@ function ArticleContainer({setAvailableLanguages}) {
 
     const afterSubmission = (event) => {
         event.preventDefault();
-        const article = {...mainArticleDetails, translations: articleTranslations, imageId};
+        const translations = articleTranslations.slice(0);
+        translations.unshift(mainArticleDetails);
+        const article = {translations, imageId};
         postArticle(article).then(response => {
             console.log(response)
         });

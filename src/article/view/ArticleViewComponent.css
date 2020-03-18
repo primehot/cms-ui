@@ -1,0 +1,30 @@
+.article-image {
+    height: 400px;
+    width: 600px;
+    object-fit: cover;
+}
+
+.article-view-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 50px;
+}
+
+.article-title {
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+.article-description {
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.article-date {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
+}

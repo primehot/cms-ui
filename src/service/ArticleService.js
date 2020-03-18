@@ -1,12 +1,12 @@
 import http from "./http/HttpClient";
 
 export const postArticle = (article) => {
-    const config = {
-        headers: {
-            'content-type': 'application/json'
-        }
-    };
     return http.post('/article', article);
+};
+
+export const getArticle = (id) => {
+    console.log(id)
+    return http.get(`/article/${id}`);
 };
 
 export const postImage = (image) => {

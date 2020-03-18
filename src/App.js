@@ -3,13 +3,15 @@ import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import HeaderComponent from "./header/HeaderComponent";
 import ArticleContainer from "./article/publish/container/ArticleContainer";
+import ArticleViewComponent from "./article/view/ArticleViewComponent";
 
 
 const routes = (
     <Router>
         <HeaderComponent/>
         <Switch>
-            <Route exact path="/" component={ArticleContainer}/>
+            <Route exact path="/article" component={ArticleContainer}/>
+            <Route exact path="/article/:id" component={ArticleViewComponent}/>
         </Switch>
     </Router>
 );

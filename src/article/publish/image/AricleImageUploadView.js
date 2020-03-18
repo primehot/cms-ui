@@ -27,7 +27,7 @@ function ArticleImageUploadView({onImageUpload}) {
                 style={{opacity: 0, position: 'absolute', zIndex: -1}}
                 ref={imageUploadRef}
             />
-            <img className="image-upload-preview" src={image}/>
+            <img className="image-preview" src={image}/>
         </div>
     );
 }

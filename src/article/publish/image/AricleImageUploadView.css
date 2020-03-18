@@ -5,7 +5,7 @@
     margin: 20px;
 }
 
-.image-upload-preview {
+.image-preview {
     height: 300px;
     width: 500px;
     object-fit: cover;

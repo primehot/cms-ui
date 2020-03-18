@@ -1,8 +1,8 @@
 import {SET_AVAILABLE_LANGUAGES} from "../action-type";
-import {languages} from "../../constants"
+import {LANGUAGES} from "../../constants"
 
 const initState = {
-    availableLanguages: languages
+    availableLanguages: LANGUAGES
 };
 
 const rootReducer = (state = initState, action) => {
