@@ -41,6 +41,10 @@ function ArticleContainer({setAvailableLanguages}) {
         event.preventDefault();
     };
 
+    const onPublishClick = () => {
+
+    };
+
     return (
         <form onSubmit={afterSubmission}>
             <div className="article-publish-container">
@@ -58,10 +62,15 @@ function ArticleContainer({setAvailableLanguages}) {
                     <CreateEditTranslations translations={articleTranslations}
                                             onTranslationChangeCallback={onTranslationChangeCallback}/>
                 </div>
+                <div className="article-publish-container-form-buttons">
+                    <Button variant="contained" color="primary" size="medium" type="submit">
+                        Send
+                    </Button>
+                    <Button variant="contained" color="secondary" size="medium" onClick={onPublishClick}>
+                        Publish
+                    </Button>
+                </div>
             </div>
-            <Button variant="contained" color="primary" size="medium" type="submit">
-                Send
-            </Button>
         </form>
     );
 }
