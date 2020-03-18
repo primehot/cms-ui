@@ -10,7 +10,7 @@ function HeaderComponent() {
             <div className='binance-c-header-content'>
                 <Link className='binance-c-header-title' to="/">Binance CMS</Link>
                 <Button
-                    component={Link} to="/article/"
+                    component={Link} to="/article/create"
                     variant="contained"
                     color="primary"
                 >

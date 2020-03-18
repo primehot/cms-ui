@@ -4,8 +4,12 @@ export const postArticle = (article) => {
     return http.post('/article', article);
 };
 
+export const putArticle = (id, article) => {
+    console.log(article)
+    return http.put(`/article/${id}`, article);
+};
+
 export const getArticle = (id) => {
-    console.log(id)
     return http.get(`/article/${id}`);
 };
 
