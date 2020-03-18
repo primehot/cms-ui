@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import {setAvailableLanguages} from "../../../store/action/languageAction";
 import {connect} from "react-redux";
 import {languages} from "../../../constants";
+import ArticleImageUploadView from "../image/AricleImageUploadView";
 
 function ArticleContainer({setAvailableLanguages}) {
 
@@ -44,6 +45,10 @@ function ArticleContainer({setAvailableLanguages}) {
         <form onSubmit={afterSubmission}>
             <div className="article-publish-container">
                 <div className="article-publish-container-data">
+                    <ArticleImageUploadView />
+                </div>
+                <div className="article-publish-container-data">
+
                     <ArticleForm article={mainArticleDetails} onChangeCallback={onMainArticleChangeCallback}>
                         <Button variant="contained" color="secondary" size="medium" onClick={addNewTranslation} disabled={addTranslationDisabled}>
                             Add translation

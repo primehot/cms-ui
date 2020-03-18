@@ -1,0 +1,29 @@
+import React, {useRef, useState} from "react";
+import Button from "@material-ui/core/Button";
+import './AricleImageUploadView.css'
+
+function ArticleImageUploadView() {
+
+    const imageUploadRef = useRef();
+    const [image, setImage] = useState()
+
+    const handleChange = (event) => {
+        setImage(URL.createObjectURL(event.target.files[0]))
+    };
+
+    return (
+        <div className="image-upload-container">
+            <Button variant="contained" color="primary" onClick={() => imageUploadRef.current.click()}> Upload </Button>
+            <input
+                type="file"
+                onChange={handleChange}
+                accept={"accept=image/*"}
+                style={{opacity: 0, position: 'absolute', zIndex: -1}}
+                ref={imageUploadRef}
+            />
+            <img className="image-upload-preview" src={image}/>
+        </div>
+    );
+}
+
+export default ArticleImageUploadView;
