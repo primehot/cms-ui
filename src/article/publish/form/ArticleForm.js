@@ -16,7 +16,8 @@ function ArticleForm({article, onChangeCallback, availableLanguages, children}) 
                 value={language || ''}
                 onChange={(event) => onChangeCallback({language: event.target.value})}
             >
-                {availableLanguages.map((l, index) => <MenuItem key={index} value={l}>{l}</MenuItem>)}
+                {language && <MenuItem value={language}>{language}</MenuItem>}
+                {availableLanguages.map((lng, index) => <MenuItem key={index} value={lng}>{lng}</MenuItem>)}
             </Select>
             {!language && <FormHelperText>This is required!</FormHelperText>}
             <TextField
