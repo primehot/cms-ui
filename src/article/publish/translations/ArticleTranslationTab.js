@@ -16,18 +16,25 @@ function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
     useEffect(() => {
         if (translations.length > 0) {
             setTabPositionNames(translations.map(article => article.language));
+            const newTranslationIndex = translations.findIndex(tr => !tr.language);
+            if (newTranslationIndex > -1) {
+                setTabPosition(newTranslationIndex);
+            } else if (tabPosition >= translations.length) {
+                setTabPosition(translations.length - 1)
+            }
         }
     }, [translations]);
 
     useEffect(() => {
         if (translations.length > 0) {
-            setArticle(translations[tabPosition]);
+            const artoicle = translations[tabPosition];
+            setArticle(artoicle);
         }
     }, [tabPosition, translations]);
 
     const onTabChange = (event, newValue) => {
         // if (tabPosition !== TABLE_DEFAULT_POSITION) {
-            setTabPosition(newValue)
+        setTabPosition(newValue)
         // }
     };
 
@@ -40,17 +47,22 @@ function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
     };
 
     const onTranslationRemove = () => {
-        const updatedTranslations = translations.splice(tabPosition, 1);
-        onTranslationChangeCallback(updatedTranslations);
+        if (translations.length < 2) {
+            onTranslationChangeCallback([]);
+            return;
+        }
+        const copiedTranslations = translations.slice(0);
+        copiedTranslations.splice(tabPosition, 1);
+        onTranslationChangeCallback(copiedTranslations);
     };
 
     return (
         <>
             {translations.length > 0 &&
-            <div>
+            <div style={{maxWidth: '520px'}}>
                 <Paper square>
                     <Tabs
-                        value={tabPosition < tabPositionNames.length ? tabPosition : tabPositionNames.length - 1}
+                        value={tabPosition}
                         indicatorColor="secondary"
                         textColor="primary"
                         variant="scrollable"

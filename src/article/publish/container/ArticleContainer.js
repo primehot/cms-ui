@@ -5,18 +5,21 @@ import CreateEditTranslations from "../translations/ArticleTranslationTab";
 import Button from "@material-ui/core/Button";
 import {setAvailableLanguages} from "../../../store/action/languageAction";
 import {connect} from "react-redux";
-import {languages} from "../../../constants"
+import {languages} from "../../../constants";
 
 function ArticleContainer({setAvailableLanguages}) {
 
-    const [mainArticleDetails, setMainArticleDetails] = useState();
+    const [mainArticleDetails, setMainArticleDetails] = useState({});
     const [articleTranslations, setArticleTranslations] = useState([]);
+    const [addTranslationDisabled, setAddTranslationDisabled] = useState(false);
 
     useEffect(() => {
         if(mainArticleDetails) {
             const usedLanguage = articleTranslations.map(({language}) => language);
             usedLanguage.push(mainArticleDetails.language);
-            setAvailableLanguages(languages.filter(language => !usedLanguage.includes(language)));
+            const unusedLanguages = languages.filter(language => !usedLanguage.includes(language));
+            setAvailableLanguages(unusedLanguages);
+            setAddTranslationDisabled(!mainArticleDetails.language || articleTranslations.filter(el => !el.language).length > 0 || unusedLanguages.length === 0);
         }
     }, [mainArticleDetails, articleTranslations]);
 
@@ -42,7 +45,7 @@ function ArticleContainer({setAvailableLanguages}) {
             <div className="article-publish-container">
                 <div className="article-publish-container-data">
                     <ArticleForm article={mainArticleDetails} onChangeCallback={onMainArticleChangeCallback}>
-                        <Button variant="contained" color="secondary" size="medium" onClick={addNewTranslation}>
+                        <Button variant="contained" color="secondary" size="medium" onClick={addNewTranslation} disabled={addTranslationDisabled}>
                             Add translation
                         </Button>
                     </ArticleForm>
