@@ -1,0 +1,21 @@
+.article-publish-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #424242;
+    padding: 20px;
+}
+
+.article-publish-container-data {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.article-publish-container-form-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+

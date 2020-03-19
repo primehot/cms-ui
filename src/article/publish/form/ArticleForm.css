@@ -1,0 +1,8 @@
+.article-publish-form {
+    display: flex;
+    padding: 10px;
+    background-color: white;
+    flex-direction: column;
+    width: 500px;
+    margin: 10px;
+}

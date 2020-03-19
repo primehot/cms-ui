@@ -1,0 +1,17 @@
+.binance-c-header {
+    background-color: #212121;
+    height: 80px;
+}
+
+.binance-c-header-title {
+    color: #ffeb3b;
+    font-weight: bold;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.binance-c-header-content {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}

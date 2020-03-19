@@ -1,0 +1,12 @@
+.image-upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px;
+}
+
+.image-preview {
+    height: 300px;
+    width: 500px;
+    object-fit: cover;
+}

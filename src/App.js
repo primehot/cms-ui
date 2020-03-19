@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import CssBaseline from "@material-ui/core/CssBaseline";
+import HeaderComponent from "./header/HeaderComponent";
+import ArticleContainer from "./article/publish/container/ArticleCreateEditContainer";
+import ArticleViewComponent from "./article/view/ArticleViewComponent";
+import ArticleMainView from "./main-view/ArticleMainView";
+
+
+const routes = (
+    <Router>
+        <HeaderComponent/>
+        <Switch>
+            <Route exact path="/" component={ArticleMainView}/>
+            <Route exact path="/article/create" component={ArticleContainer}/>
+            <Route exact path="/article/edit/:id" component={ArticleContainer}/>
+            <Route exact path="/article/:id" component={ArticleViewComponent}/>
+        </Switch>
+    </Router>
+);
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <CssBaseline/>
+            {routes}
+        </div>
+    );
 }
 
 export default App;
