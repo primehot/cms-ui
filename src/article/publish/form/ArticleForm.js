@@ -4,7 +4,6 @@ import './ArticleForm.css'
 import {connect} from "react-redux";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
 
 function ArticleForm({article, onChangeCallback, availableLanguages, children}) {
 
