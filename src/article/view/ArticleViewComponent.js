@@ -18,6 +18,7 @@ function ArticleViewComponent({match}) {
         const {params} = match;
         getArticle(params.id).then(response => {
             const {data} = response;
+            // eslint-disable-next-line
             const mapped = data.translations.reduce((a, b) => (a[b.language] = b, a), {});
             setTranslation(mapped);
             const fistLanguage = Object.keys(mapped)[0];

@@ -4,12 +4,14 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import HeaderComponent from "./header/HeaderComponent";
 import ArticleContainer from "./article/publish/container/ArticleCreateEditContainer";
 import ArticleViewComponent from "./article/view/ArticleViewComponent";
+import ArticleMainView from "./main-view/ArticleMainView";
 
 
 const routes = (
     <Router>
         <HeaderComponent/>
         <Switch>
+            <Route exact path="/" component={ArticleMainView}/>
             <Route exact path="/article/create" component={ArticleContainer}/>
             <Route exact path="/article/edit/:id" component={ArticleContainer}/>
             <Route exact path="/article/:id" component={ArticleViewComponent}/>

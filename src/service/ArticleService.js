@@ -21,6 +21,10 @@ export const getArticle = (id) => {
     return http.get(`/article/${id}`);
 };
 
+export const getAllArticle = (page, size) => {
+    return http.get(`/article?page=${page}&size=${size}`);
+};
+
 export const postImage = (image) => {
     const formData = new FormData();
     formData.append("image", image);

@@ -9,6 +9,8 @@ import {LANGUAGES} from "../../../constants";
 import ArticleImageUploadView from "../image/AricleImageUploadView";
 import {getArticle, postArticle, putArticle} from "../../../service/ArticleService";
 import {Prompt} from "react-router-dom";
+import Tooltip from "@material-ui/core/Tooltip";
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
 
@@ -47,7 +49,9 @@ function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
             usedLanguage.push(mainArticleDetails.language);
             const unusedLanguages = LANGUAGES.filter(language => !usedLanguage.includes(language));
             setAvailableLanguages(unusedLanguages);
-            setAddTranslationDisabled(!mainArticleDetails.language || articleTranslations.filter(el => !el.language).length > 0 || unusedLanguages.length === 0);
+            setAddTranslationDisabled(!mainArticleDetails.language
+                || articleTranslations.filter(el => !el.language || !el.title || !el.description).length > 0
+                || unusedLanguages.length === 0);
         }
     }, [setAvailableLanguages, mainArticleDetails, articleTranslations]);
 
@@ -102,6 +106,9 @@ function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
                                 disabled={addTranslationDisabled}>
                             Add translation
                         </Button>
+                        <Tooltip title="Add translation if all required fields filled" aria-label="add">
+                            <InfoOutlinedIcon color="primary" />
+                        </Tooltip>
                     </ArticleForm>
 
                     <CreateEditTranslations translations={articleTranslations}

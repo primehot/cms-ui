@@ -1,0 +1,11 @@
+.cards-view {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.article-main-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

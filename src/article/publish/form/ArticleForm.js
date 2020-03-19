@@ -12,7 +12,7 @@ function ArticleForm({article, onChangeCallback, availableLanguages, children}) 
 
     return (
         <div className="article-publish-form">
-            <InputLabel>Language</InputLabel>
+            <InputLabel>Language*</InputLabel>
             <Select
                 native
                 required
@@ -23,7 +23,6 @@ function ArticleForm({article, onChangeCallback, availableLanguages, children}) 
                 {language && <option value={language}>{language}</option>}
                 {availableLanguages.map((lng, index) => <option key={index} value={lng}>{lng}</option>)}
             </Select>
-            {!language && <FormHelperText>This is required!</FormHelperText>}
             <TextField
                 required
                 label="Title"
