@@ -14,12 +14,14 @@ function ArticleImageUploadView({imageId, onImageUpload}) {
         if(imageId) {
             setImage(API_BASE_URL + '/image/' + imageId);
         }
-    },[imageId])
+    },[imageId]);
 
     const handleChange = (event) => {
         const imageBytes = event.target.files[0];
         postImage(imageBytes).then(response => {
             onImageUpload(response.data);
+        }).catch(error => {
+            console.log('Saved image failed', error)
         });
     };
 

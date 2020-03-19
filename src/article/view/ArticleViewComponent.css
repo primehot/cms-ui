@@ -6,14 +6,14 @@
 
 .article-view-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     margin: 50px;
 }
 
-.article-view-container-row {
+.article-view-container-column {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -28,13 +28,24 @@
 
 .article-description {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .article-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
     font-weight: bold;
     font-size: 15px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.edit-publish-button-group {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }

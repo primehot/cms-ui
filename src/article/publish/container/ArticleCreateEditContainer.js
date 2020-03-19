@@ -30,7 +30,9 @@ function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
                 delete data.translations;
                 setArticleCore(data);
                 setImageId(data.imageId)
-            })
+            }).catch(error => {
+                console.log('Populate article failed', error)
+            });
         } else {
             setMainArticleDetails({});
             setArticleTranslations([]);
@@ -47,7 +49,7 @@ function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
             setAvailableLanguages(unusedLanguages);
             setAddTranslationDisabled(!mainArticleDetails.language || articleTranslations.filter(el => !el.language).length > 0 || unusedLanguages.length === 0);
         }
-    }, [mainArticleDetails, articleTranslations]);
+    }, [setAvailableLanguages, mainArticleDetails, articleTranslations]);
 
     const onMainArticleChangeCallback = (changes) => {
         const updatedArticle = {...mainArticleDetails, ...changes};
@@ -71,14 +73,18 @@ function ArticleCreateEditContainer({setAvailableLanguages, history, match}) {
         translations.unshift(mainArticleDetails);
         const article = {translations, imageId};
         if (articleCore) {
-            putArticle(articleCore.id, article).then(() => {
+            putArticle(articleCore.id, {...articleCore, ...article}).then(() => {
                 setShouldLeave(false);
                 history.push(`/article/${articleCore.id}`);
+            }).catch(error => {
+                console.log('Edit article failed', error)
             });
         } else {
             postArticle(article).then(response => {
                 setShouldLeave(false);
                 history.push(`/article/${response.data.id}`);
+            }).catch(error => {
+                console.log('Create image failed', error)
             });
         }
     };

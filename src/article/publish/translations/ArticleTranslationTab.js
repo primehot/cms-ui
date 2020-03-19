@@ -9,7 +9,6 @@ import {TAB_DEFAULT_NAME} from "../../../constants";
 
 function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
 
-    const [article, setArticle] = useState();
     const [tabPosition, setTabPosition] = useState(0);
     const [tabPositionNames, setTabPositionNames] = useState([]);
 
@@ -23,23 +22,14 @@ function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
                 setTabPosition(translations.length - 1)
             }
         }
-    }, [translations]);
-
-    useEffect(() => {
-        if (translations.length > 0) {
-            const artoicle = translations[tabPosition];
-            setArticle(artoicle);
-        }
     }, [tabPosition, translations]);
 
     const onTabChange = (event, newValue) => {
-        // if (tabPosition !== TABLE_DEFAULT_POSITION) {
         setTabPosition(newValue)
-        // }
     };
 
     const onArticleChangeCallback = (changes) => {
-        const updatedArticle = {...article, ...changes};
+        const updatedArticle = {...translations[tabPosition], ...changes};
         const updatedTranslation = {...translations[tabPosition], ...updatedArticle};
         const copiedTranslations = translations.slice(0);
         copiedTranslations[tabPosition] = updatedTranslation;
@@ -73,7 +63,7 @@ function ArticleTranslationTab({translations, onTranslationChangeCallback}) {
                             <Tab key={index} value={index} label={name ? name : TAB_DEFAULT_NAME}/>)}
                     </Tabs>
                 </Paper>
-                <ArticleForm article={article} onChangeCallback={onArticleChangeCallback}>
+                <ArticleForm article={translations[tabPosition]} onChangeCallback={onArticleChangeCallback}>
                     <Button variant="contained" color="secondary" size="medium" onClick={onTranslationRemove}>
                         Remove
                     </Button>

@@ -9,6 +9,14 @@ export const putArticle = (id, article) => {
     return http.put(`/article/${id}`, article);
 };
 
+export const publishArticle = (id) => {
+    return http.post(`/article/${id}/publish`);
+};
+
+export const deleteArticle = (id) => {
+    return http.delete(`/article/${id}`);
+};
+
 export const getArticle = (id) => {
     return http.get(`/article/${id}`);
 };
